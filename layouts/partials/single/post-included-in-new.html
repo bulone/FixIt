@@ -1,0 +1,33 @@
+{{- $categories := slice -}}
+{{- range .GetTerms "categories" -}}
+  {{- $categories = $categories | append (
+    printf `<a href="%v" class="post-category" title="%v">%v</a>`
+    (partial "function/escapeurl.html" .RelPermalink)
+    (printf "%v - %v" (T "category") .LinkTitle)
+    .LinkTitle
+  ) -}}
+{{- end -}}
+{{- $categoriesStr := delimit $categories "&nbsp;,&nbsp" -}}
+
+{{- $collections := slice -}}
+{{- range .GetTerms "collections" -}}
+  {{- $collections = $collections | append (
+    printf `<a href="%v" class="post-collection" title="%v">%v</a>`
+    (partial "function/escapeurl.html" .RelPermalink)
+    (printf "%v - %v" (T "collection") .LinkTitle)
+    .LinkTitle
+  ) -}}
+{{- end -}}
+{{- $collectionStr := delimit $collections "&nbsp;,&nbsp" -}}
+
+{{- if .Params.categories | or .Params.collections -}}
+  <span class="post-included-in">
+    {{- if not .Params.collections -}}
+      {{- $categoriesStr | safeHTML -}}
+    {{- else if not .Params.categories -}}
+      {{- $collectionStr | safeHTML -}}
+    {{- else -}}
+      {{- print $categoriesStr "｜" $collectionStr | safeHTML -}}
+    {{- end -}}
+  </span>
+{{- end -}}

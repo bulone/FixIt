@@ -2,3 +2,174 @@
 // Custom style
 // 自定义样式
 // ==============================
+@import url("https://ik.imagekit.io/xlccwwjep/shg/result.css?updatedAt=1742026160717");
+/* ------------- 自定义变量名称 ------------ */
+$global-border-radius: 1.25rem;
+$global-web-color: #4f46e5;
+$global-webfont-family: "Google Sans CN Flex", system-ui, -apple-system;
+
+/* -------------- 自定义方法 ------------- */
+@mixin gradient($angle, $firstcolor, $secondcolor, $thirdcolor) {
+    background: linear-gradient($angle, $firstcolor, $secondcolor 60%, $thirdcolor);
+    color: transparent;
+    background-clip: text;
+}
+
+
+/* ------------- 全局通用样式 ------------- */
+body {
+    .icon-pin {
+        color: #dc2626;
+    }
+
+    .icon-repost {
+        color: $global-web-color;
+    }
+
+    font-family: $global-webfont-family !important;
+}
+
+/* ----------- 自定义Header样式 ---------- */
+.desktop {
+    padding-inline: 1rem;
+    background-color: transparent !important;
+    margin-top: 3rem;
+
+    .header-wrapper {
+        width: 700px !important;
+        margin: auto;
+        padding: 0 !important;
+    }
+
+    .delimiter,
+    .theme-switch {
+        display: none;
+    }
+
+    &:hover {
+        box-shadow: none;
+    }
+
+    nav {
+        overflow: visible !important;
+    }
+
+    li:has(ul) {
+        position: relative;
+
+
+    }
+}
+
+/* ------------ 自定义主页CSS ------------ */
+.post-article {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    column-gap: 1.25rem;
+    margin-top: 2.5rem;
+
+    .summary {
+        display: flex;
+        flex-direction: column;
+        border-radius: 1.25rem;
+        overflow: hidden;
+        border: 1px solid #eee;
+        padding: 0 !important;
+
+        &::after {
+            display: none;
+        }
+
+        .featured-image-preview {
+            margin: 0 !important;
+            aspect-ratio: auto 1000 / 550 !important;
+
+            &:hover {
+                transform: none !important;
+            }
+        }
+    }
+
+    .post-detail {
+        display: flex;
+        flex-direction: column;
+        flex-grow: 1;
+        justify-content: space-between;
+        padding: 1.25rem;
+
+        .post-included-info {
+            font-weight: 600;
+            font-size: 0.875rem;
+            .post-category {
+                @include gradient(135deg, #4f46e5, #818cf8, #a5b4fc);
+            }
+
+            .post-collection {
+                @include gradient(135deg, #0d9488,#2dd4bf,#5eead4);
+            }
+        }
+
+
+        .content {
+            font-size: 0.875rem;
+            margin-block: 0.25rem !important;
+        }
+
+        .single-title,
+        .content {
+            display: -webkit-box;
+            text-overflow: ellipsis;
+            -webkit-line-clamp: 2;
+            overflow: hidden;
+            white-space: initial;
+            -webkit-box-orient: vertical;
+            padding: 0 !important;
+        }
+
+        .post-footer {
+            line-height: 1.2;
+            text-align: center;
+            margin: 0 !important;
+
+            .post-sign {
+                span:not(:last-child)::after {
+                    content: '';
+                    margin: 0 0.25rem;
+                }
+            }
+        }
+    }
+
+
+}
+
+/* ------------- 自定义页面宽度 ------------ */
+[data-page-style='custom'] {
+
+    @media only screen and (min-width: 760px) {
+        %page-style {
+            width: 700px !important;
+        }
+    }
+
+    @media only screen and (max-width: 760px) {
+        %page-style {
+            width: 100% !important;
+        }
+
+        .header-wrapper {
+            width: 100% !important;
+        }
+
+        #header-mobile {
+            margin-top: 2.25rem;
+        }
+    }
+
+    @media only screen and (max-width: 480px) {
+        .post-article {
+            grid-template-columns: 1fr;
+            margin-top: 1.5rem;
+        }
+    }
+}
